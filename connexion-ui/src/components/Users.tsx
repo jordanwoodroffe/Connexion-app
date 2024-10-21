@@ -8,10 +8,11 @@ import {
   List,
   ListItem,
   Spinner,
-  Stack,
   Text,
   useToast,
   Center,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -19,6 +20,7 @@ interface User {
   UserId: string;
   Name: string;
   PermissionsOverride: string[];
+  Role: string;
 }
 
 const fetchUsers = async (): Promise<User[]> => {
@@ -80,22 +82,54 @@ const Users = () => {
   return (
     <Box p={5}>
       <Heading mb={5}>Users</Heading>
+      <Grid
+        templateColumns={{ base: "1fr", md: "2fr 2fr 1fr 1fr" }}
+        gap={4}
+        alignItems="center"
+        mb={3}
+        fontWeight="bold"
+      >
+        <GridItem>
+          <Text>ID</Text>
+        </GridItem>
+        <GridItem>
+          <Text>Name</Text>
+        </GridItem>
+        <GridItem>
+          <Text>Role</Text>
+        </GridItem>
+        <GridItem>
+          <Text>Action</Text>
+        </GridItem>
+      </Grid>
       <List spacing={3}>
         {users?.map((user) => (
           <ListItem key={user.UserId} p={3} borderWidth="1px" borderRadius="md">
-            <Stack
-              direction={{ base: "column", md: "row" }}
-              justify="space-between"
-              align="center"
+            <Grid
+              templateColumns={{ base: "1fr", md: "2fr 2fr 1fr 1fr" }}
+              gap={4}
+              alignItems="center"
             >
-              <Text>{user.Name}</Text>
-              <Button
-                colorScheme="blue"
-                onClick={() => handleAccessProtected(user.PermissionsOverride)}
-              >
-                Access protected page
-              </Button>
-            </Stack>
+              <GridItem>
+                <Text>{user.UserId}</Text>
+              </GridItem>
+              <GridItem>
+                <Text>{user.Name}</Text>
+              </GridItem>
+              <GridItem>
+                <Text>{user.Role}</Text>
+              </GridItem>
+              <GridItem>
+                <Button
+                  colorScheme="blue"
+                  onClick={() =>
+                    handleAccessProtected(user.PermissionsOverride)
+                  }
+                >
+                  Access protected page
+                </Button>
+              </GridItem>
+            </Grid>
           </ListItem>
         ))}
       </List>
