@@ -69,7 +69,7 @@ super(scope, id, props);
   - src
     - routes
     - middleware
-    - schemas
+    - models
   - package.json
   - README.md
 
@@ -96,29 +96,113 @@ super(scope, id, props);
 
 ### GET USER
 
+Fetch a specific user by their `UserId`.
+
+**Request:**
+
 ```
 curl -X GET "http://localhost:8080/user/1" \
  -H "Content-Type: application/json" \
  -H "X-User-Id: 5"
 ```
 
+**Response:**
+
+- **200 OK**: Returns the user details.
+- **404 Not Found**: If the user does not exist.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+{
+  "UserId": "1",
+  "Name": "John Doe",
+  "Username": "johndoe",
+  "Email": "johndoe@example.com",
+  "Role": "Admin",
+  "PermissionsOverride": ["CanEditUser"]
+}
+```
+
+### GET ALL USERS
+
+Fetch all users.
+
+**Request:**
+
+```
+curl -X GET "http://localhost:8080/user" \
+ -H "Content-Type: application/json" \
+ -H "X-User-Id: 5"
+```
+
+**Response:**
+
+- **200 OK**: Returns a list of all users.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+[
+  {
+    "UserId": "1",
+    "Name": "John Doe",
+    "Username": "johndoe",
+    "Email": "johndoe@example.com",
+    "Role": "Admin",
+    "PermissionsOverride": ["CanEditUser"]
+  },
+  {
+    "UserId": "2",
+    "Name": "Jane Smith",
+    "Username": "janesmith",
+    "Email": "janesmith@example.com",
+    "Role": "User",
+    "PermissionsOverride": []
+  }
+]
+```
+
 ### CREATE USER
+
+Create a new user.
+
+**Request:**
 
 ```
 curl -X POST "http://localhost:8080/user" \
  -H "Content-Type: application/json" \
  -H "X-User-Id: 5" \
  -d '{
-"UserId": "6",
-"Name": "Billy Mathers",
-"Username": "billmathers",
-"Email": "billmathers@example.com",
-"Role": "Staff",
-"PermissionsOverride": ["CanViewProtectedRoute"]
+  "UserId": "INSERT_USER_ID",
+  "Name": "Cherry Mathers",
+  "Username": "cherrymathers",
+  "Email": "cherrymathers@example.com",
+  "Role": "Staff"
 }'
 ```
 
+**Response:**
+
+- **201 Created**: If the user is created successfully.
+- **400 Bad Request**: If the request body is invalid.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+{
+  "message": "User created successfully"
+}
+```
+
 ### DELETE USER
+
+Delete a specific user by their `UserId`.
+
+**Request:**
 
 ```
 curl -X DELETE "http://localhost:8080/user/6" \
@@ -126,19 +210,135 @@ curl -X DELETE "http://localhost:8080/user/6" \
  -H "X-User-Id: 5"
 ```
 
+**Response:**
+
+- **200 OK**: If the user is deleted successfully.
+- **404 Not Found**: If the user does not exist.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+{
+  "message": "User deleted successfully"
+}
+```
+
 ### UPDATE USER
+
+Update a specific user by their `UserId`.
+
+**Request:**
 
 ```
 curl -X PUT "http://localhost:8080/user/1" \
  -H "Content-Type: application/json" \
  -H "X-User-Id: 5" \
  -d '{
-"Name": "Jane Doe",
-"Username": "janedoe",
-"Email": "janedoe@example.com",
-"Role": "User",
-"PermissionsOverride": ["CanViewProtectedRoute"]
+  "Name": "Jane Doe",
+  "Username": "janedoe",
+  "Email": "janedoe@example.com",
+  "Role": "User",
+  "PermissionsOverride": ["CanViewProtectedRoute"]
 }'
+```
+
+**Response:**
+
+- **200 OK**: If the user is updated successfully.
+- **404 Not Found**: If the user does not exist.
+- **400 Bad Request**: If the request body is invalid.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+{
+  "UserId": "1",
+  "Name": "Jane Doe",
+  "Username": "janedoe",
+  "Email": "janedoe@example.com",
+  "Role": "User",
+  "PermissionsOverride": ["CanViewProtectedRoute"]
+}
+```
+
+### TypeScript Types
+
+**User Type:**
+
+```typescript
+interface User {
+  UserId: string;
+  Name: string;
+  Username: string;
+  Email: string;
+  Role: string;
+  PermissionsOverride: string[];
+}
+```
+
+**Role Type:**
+
+```typescript
+interface Role {
+  RoleId: string;
+  Permissions: string[];
+}
+```
+
+**Create User Request:**
+
+```typescript
+interface CreateUserRequest {
+  UserId: string;
+  Name: string;
+  Username: string;
+  Email: string;
+  Role: string;
+}
+```
+
+**Update User Request:**
+
+```typescript
+interface UpdateUserRequest {
+  Name?: string;
+  Username?: string;
+  Email?: string;
+  Role?: string;
+  PermissionsOverride?: string[];
+}
+```
+
+**Create/Update User Response:**
+
+```typescript
+interface CreateUserResponse {
+  message: string;
+}
+
+interface UpdateUserResponse extends User {}
+```
+
+**Get User Response:**
+
+```typescript
+interface GetUserResponse extends User {}
+```
+
+**Get All Users Response:**
+
+```typescript
+type GetAllUsersResponse = User[];
+```
+
+**Delete User Response:**
+
+```typescript
+interface DeleteUserResponse {
+  message: string;
+}
 ```
 
 ---
