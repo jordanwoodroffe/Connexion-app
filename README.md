@@ -49,7 +49,7 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 - Manual Trigger: A GitHub Actions workflow is set up to manually trigger the creation of a randomized user.
 
 ## Example Basic CDK for Backend
-
+```
 import _ as cdk from '@aws-cdk/core';
 import _ as dynamodb from '@aws-cdk/aws-dynamodb';
 
@@ -64,6 +64,7 @@ super(scope, id, props);
 
 }
 }
+```
 
 ## Project Structure
 
