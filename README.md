@@ -314,36 +314,6 @@ interface UpdateUserRequest {
 }
 ```
 
-**Create/Update User Response:**
-
-```typescript
-interface CreateUserResponse {
-  message: string;
-}
-
-interface UpdateUserResponse extends User {}
-```
-
-**Get User Response:**
-
-```typescript
-interface GetUserResponse extends User {}
-```
-
-**Get All Users Response:**
-
-```typescript
-type GetAllUsersResponse = User[];
-```
-
-**Delete User Response:**
-
-```typescript
-interface DeleteUserResponse {
-  message: string;
-}
-```
-
 ---
 
 # connexion-ui
