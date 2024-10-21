@@ -83,7 +83,7 @@ super(scope, id, props);
 **Permissions**:
 
 - CanReadUser
-- CanViewProtectedRoute (If Permissions/ PermissionOverrides array contains 'CanViewProtectedRoute' on user)
+- CanViewProtectedRoute (If Permissions/ PermissionOverrides array contains 'CanViewProtectedRoute')
 
 ## API Documentation and Test Curls
 
