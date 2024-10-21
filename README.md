@@ -6,7 +6,7 @@ connexion-rbac is the backend service responsible for managing user roles and pe
 
 ### Running the Application
 
-Please paste the emailed .env which contains required AWS credentials to connect to DynamoDB inside of the connexion-rbac root directory
+Please paste the emailed .env (contains required AWS credentials to connect to DynamoDB) inside of the connexion-rbac root directory
 
 1. **Install dependencies**:
    npm install
