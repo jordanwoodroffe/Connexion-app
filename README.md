@@ -352,6 +352,14 @@ interface DeleteUserResponse {
 
 connexion-ui is the frontend application built with React and Chakra UI. It provides a user interface for viewing users and accessing a protected route.
 
+### Running the Application
+
+1. **Install dependencies**:
+   npm install
+
+2. **Start the development server**:
+   npm run dev
+
 ## Design Choices
 
 - React: Chosen for its component-based architecture and ease of use.
@@ -413,13 +421,3 @@ super(scope, id, props);
 
 - /users: A list of all users with navigation to their respective protected pages.
 - /protectedroute: The protected route only accessible with the CanViewProtectedRoute permission.
-
-## Example Usage
-
-### Running the Application
-
-1. **Install dependencies**:
-   npm install
-
-2. **Start the development server**:
-   npm run dev
