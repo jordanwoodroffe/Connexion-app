@@ -18,7 +18,7 @@ Please paste the emailed .env (contains required AWS credentials to connect to D
 
 - Node.js and Express: Chosen for its simplicity and performance in building RESTful APIs.
 - DynamoDB: Used for its scalability and flexibility in managing user data.
-- AWS SDK: Utilized for interacting with DynamoDB and other AWS services.
+- AWS SDK V3: Utilized for interacting with DynamoDB and other AWS services.
 
 ## DynamoDB Schema
 
