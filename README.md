@@ -299,6 +299,11 @@ connexion-ui is the frontend application built with React and Chakra UI. It prov
 2. **Start the development server**:
    npm run dev
 
+## Routes
+
+- /users: A list of all users with navigation to their respective protected pages.
+- /protectedroute: The protected route only accessible with the CanViewProtectedRoute permission.
+
 ## Design Choices
 
 - React: Chosen for its component-based architecture and ease of use.
@@ -341,8 +346,3 @@ super(scope, id, props);
 }
 }
 ```
-
-## Routes
-
-- /users: A list of all users with navigation to their respective protected pages.
-- /protectedroute: The protected route only accessible with the CanViewProtectedRoute permission.
