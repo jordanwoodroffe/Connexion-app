@@ -400,7 +400,6 @@ super(scope, id, props);
 
 ## Project Structure
 
-```
 - connexion-ui
   - src
     - components
@@ -410,7 +409,6 @@ super(scope, id, props);
   - tests
   - package.json
   - README.md
-```
 
 ## Routes
 
