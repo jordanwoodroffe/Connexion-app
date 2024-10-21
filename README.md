@@ -282,54 +282,6 @@ curl -X GET "http://localhost:8080/user/10/permissions" \
 }
 ```
 
-### TypeScript Types
-
-**User Type:**
-
-```typescript
-interface User {
-  UserId: string;
-  Name: string;
-  Username: string;
-  Email: string;
-  Role: string;
-  PermissionsOverride: string[];
-}
-```
-
-**Role Type:**
-
-```typescript
-interface Role {
-  RoleId: string;
-  Permissions: string[];
-}
-```
-
-**Create User Request:**
-
-```typescript
-interface CreateUserRequest {
-  UserId: string;
-  Name: string;
-  Username: string;
-  Email: string;
-  Role: string;
-}
-```
-
-**Update User Request:**
-
-```typescript
-interface UpdateUserRequest {
-  Name?: string;
-  Username?: string;
-  Email?: string;
-  Role?: string;
-  PermissionsOverride?: string[];
-}
-```
-
 ---
 
 # connexion-ui
