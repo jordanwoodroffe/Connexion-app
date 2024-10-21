@@ -1,0 +1,26 @@
+name: Manual Trigger for User Creation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-user:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate random 6-digit number
+        id: random-number
+        run: echo "::set-output name=number::$(shuf -i 100000-999999 -n 1)"
+
+      - name: Create user with curl
+        run: |
+          curl -X POST "http://localhost:8080/user" \
+          -H "Content-Type: application/json" \
+          -H "X-User-Id: 5" \
+          -d '{
+            "UserId": "${{ steps.random-number.outputs.number }}",
+            "Name": "CI generated user",
+            "Username": "CIUser",
+            "Email": "ciuser@example.com",
+            "Role": "Staff"
+          }'
