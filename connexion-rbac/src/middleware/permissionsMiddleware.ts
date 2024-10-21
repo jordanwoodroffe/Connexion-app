@@ -47,8 +47,6 @@ export const permissionsMiddleware = (requiredPermissions: string[]) => {
 
       const rolePermissions = role.Permissions || [];
 
-      console.log("role permissions", rolePermissions);
-
       const userPermissionsOverride = user.PermissionsOverride || [];
 
       const combinedPermissions = new Set([
@@ -56,13 +54,9 @@ export const permissionsMiddleware = (requiredPermissions: string[]) => {
         ...userPermissionsOverride,
       ]);
 
-      console.log("combined permissions", combinedPermissions);
-
       const hasPermission = requiredPermissions.every((permission) =>
         combinedPermissions.has(permission)
       );
-
-      console.log("has permissions", hasPermission);
 
       if (hasPermission) {
         return next();
@@ -72,7 +66,6 @@ export const permissionsMiddleware = (requiredPermissions: string[]) => {
           .json({ error: "Forbidden: Insufficient permissions" });
       }
     } catch (error) {
-      console.error(error);
       return res.status(500).json({ error: "Internal Server Error" });
     }
   };

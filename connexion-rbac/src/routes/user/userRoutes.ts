@@ -173,7 +173,6 @@ router.get(
     };
 
     try {
-      // Fetch user details
       const userData = await dynamoDB.send(new GetCommand(userParams));
       if (!userData.Item) {
         return res.status(404).json({ error: "User not found" });
