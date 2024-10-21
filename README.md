@@ -286,6 +286,7 @@ curl -X GET "http://localhost:8080/user/10/permissions" \
 
 # connexion-ui
 
+![image](https://github.com/user-attachments/assets/dbb17993-03ae-42c0-bc16-46dcf86122c7)
 
 ## Description
 
