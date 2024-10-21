@@ -22,6 +22,8 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 
 ## DynamoDB Schema
 
+![image](https://github.com/user-attachments/assets/bf7f3fce-ebed-4da1-b0e4-d80ebd6f78c3)
+
 - Table Name: connexion-users
 - Primary Key: UserId (string)
 - Attributes:
@@ -31,6 +33,8 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
   - Email (string)
   - Role (string)
   - PermissionsOverride (array of strings)
+
+![image](https://github.com/user-attachments/assets/0d44930b-d7f5-4146-ae49-3f3254756745)
 
 - Table Name: connexion-roles
 - Primary Key: RoleId (string)
