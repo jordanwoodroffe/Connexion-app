@@ -66,16 +66,6 @@ super(scope, id, props);
 }
 ```
 
-## Project Structure
-
-- connexion-rbac
-  - src
-    - routes
-    - middleware
-    - models
-  - package.json
-  - README.md
-
 ## Role System
 
 ### Admin Role
@@ -399,18 +389,6 @@ super(scope, id, props);
 }
 }
 ```
-
-## Project Structure
-
-- connexion-ui
-  - src
-    - components
-    - pages
-    - hooks
-  - public
-  - tests
-  - package.json
-  - README.md
 
 ## Routes
 
