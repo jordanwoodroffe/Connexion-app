@@ -129,7 +129,7 @@ curl -X GET "http://localhost:8080/user/1" \
   "Username": "johndoe",
   "Email": "johndoe@example.com",
   "Role": "Admin",
-  "PermissionsOverride": ["CanEditUser"]
+  "PermissionsOverride": ["CanUpdateUser"]
 }
 ```
 
@@ -160,7 +160,7 @@ curl -X GET "http://localhost:8080/user" \
     "Username": "johndoe",
     "Email": "johndoe@example.com",
     "Role": "Admin",
-    "PermissionsOverride": ["CanEditUser"]
+    "PermissionsOverride": ["CanUpdateUser"]
   },
   {
     "UserId": "2",
@@ -293,7 +293,7 @@ curl -X GET "http://localhost:8080/user/10/permissions" \
 
 ```json
 {
-  "permissions": ["CanEditUser", "CanViewProtectedRoute"]
+  "permissions": ["CanUpdateUser", "CanViewProtectedRoute"]
 }
 ```
 
