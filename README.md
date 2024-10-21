@@ -6,7 +6,7 @@ connexion-rbac is the backend service responsible for managing user roles and pe
 
 ### Running the Application
 
-.env contains required AWS credentials to connect to DB, which will be sent seperately
+Please paste the emailed .env which required AWS credentials to connect to DB inside of connexion-rbac root directory
 
 1. **Install dependencies**:
    npm install
