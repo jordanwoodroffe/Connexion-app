@@ -22,6 +22,8 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 
 ## DynamoDB Schema
 
+![image](https://github.com/user-attachments/assets/bf7f3fce-ebed-4da1-b0e4-d80ebd6f78c3)
+
 - Table Name: connexion-users
 - Primary Key: UserId (string)
 - Attributes:
@@ -31,6 +33,8 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
   - Email (string)
   - Role (string)
   - PermissionsOverride (array of strings)
+
+![image](https://github.com/user-attachments/assets/0d44930b-d7f5-4146-ae49-3f3254756745)
 
 - Table Name: connexion-roles
 - Primary Key: RoleId (string)
@@ -49,7 +53,7 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 - Manual Trigger: A GitHub Actions workflow is set up to manually trigger the creation of a randomized user.
 
 ## Example Basic CDK for Backend
-
+```
 import _ as cdk from '@aws-cdk/core';
 import _ as dynamodb from '@aws-cdk/aws-dynamodb';
 
@@ -64,6 +68,7 @@ super(scope, id, props);
 
 }
 }
+```
 
 ## Project Structure
 
@@ -313,36 +318,6 @@ interface UpdateUserRequest {
 }
 ```
 
-**Create/Update User Response:**
-
-```typescript
-interface CreateUserResponse {
-  message: string;
-}
-
-interface UpdateUserResponse extends User {}
-```
-
-**Get User Response:**
-
-```typescript
-interface GetUserResponse extends User {}
-```
-
-**Get All Users Response:**
-
-```typescript
-type GetAllUsersResponse = User[];
-```
-
-**Delete User Response:**
-
-```typescript
-interface DeleteUserResponse {
-  message: string;
-}
-```
-
 ---
 
 # connexion-ui
@@ -350,6 +325,14 @@ interface DeleteUserResponse {
 ## Description
 
 connexion-ui is the frontend application built with React and Chakra UI. It provides a user interface for viewing users and accessing a protected route.
+
+### Running the Application
+
+1. **Install dependencies**:
+   npm install
+
+2. **Start the development server**:
+   npm run dev
 
 ## Design Choices
 
@@ -412,13 +395,3 @@ super(scope, id, props);
 
 - /users: A list of all users with navigation to their respective protected pages.
 - /protectedroute: The protected route only accessible with the CanViewProtectedRoute permission.
-
-## Example Usage
-
-### Running the Application
-
-1. **Install dependencies**:
-   npm install
-
-2. **Start the development server**:
-   npm run dev

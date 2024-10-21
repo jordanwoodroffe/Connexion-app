@@ -1,14 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
-import { User, USERS_TABLE } from "../routes/user/userRoutes";
+import {
+  Role,
+  ROLES_TABLE,
+  User,
+  USERS_TABLE,
+} from "../routes/user/userRoutes";
 import { dynamoDB } from "..";
-
-const ROLES_TABLE = "connexion-roles";
-
-interface Role {
-  RoleId: string;
-  Permissions: string[];
-}
 
 export const permissionsMiddleware = (requiredPermissions: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -48,15 +46,23 @@ export const permissionsMiddleware = (requiredPermissions: string[]) => {
       const role = roleData.Item as Role;
 
       const rolePermissions = role.Permissions || [];
+
+      console.log("role permissions", rolePermissions);
+
       const userPermissionsOverride = user.PermissionsOverride || [];
 
       const combinedPermissions = new Set([
         ...rolePermissions,
         ...userPermissionsOverride,
       ]);
+
+      console.log("combined permissions", combinedPermissions);
+
       const hasPermission = requiredPermissions.every((permission) =>
         combinedPermissions.has(permission)
       );
+
+      console.log("has permissions", hasPermission);
 
       if (hasPermission) {
         return next();

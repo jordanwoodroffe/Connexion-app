@@ -14,6 +14,7 @@ import permissionsMiddleware from "../../middleware/permissionsMiddleware";
 const router = express.Router();
 
 export const USERS_TABLE = "connexion-users";
+export const ROLES_TABLE = "connexion-roles";
 
 export interface User {
   UserId: string;
@@ -22,6 +23,11 @@ export interface User {
   Email: string;
   Role: string;
   PermissionsOverride?: string[];
+}
+
+export interface Role {
+  RoleId: string;
+  Permissions: string[];
 }
 
 // Create User
@@ -150,6 +156,52 @@ router.delete(
       res.json({ message: "User deleted successfully" });
     } catch (error) {
       res.status(500).json({ error: "Could not delete user" });
+    }
+  }
+);
+
+// Get User Permissions
+router.get(
+  "/:id/permissions",
+  permissionsMiddleware(["CanReadUser"]),
+  async (req: Request, res: Response) => {
+    const userId = req.params.id;
+
+    const userParams = {
+      TableName: USERS_TABLE,
+      Key: { UserId: userId },
+    };
+
+    try {
+      // Fetch user details
+      const userData = await dynamoDB.send(new GetCommand(userParams));
+      if (!userData.Item) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const user = userData.Item as User;
+
+      // Fetch role permissions
+      const roleParams = {
+        TableName: ROLES_TABLE,
+        Key: { RoleId: user.Role },
+      };
+
+      const roleData = await dynamoDB.send(new GetCommand(roleParams));
+      if (!roleData.Item) {
+        return res.status(404).json({ error: "Role not found" });
+      }
+
+      const role = roleData.Item as Role;
+
+      const combinedPermissions = new Set([
+        ...role.Permissions,
+        ...(user.PermissionsOverride || []),
+      ]);
+
+      res.json({ permissions: Array.from(combinedPermissions) });
+    } catch (error) {
+      res.status(500).json({ error: "Could not retrieve permissions" });
     }
   }
 );
