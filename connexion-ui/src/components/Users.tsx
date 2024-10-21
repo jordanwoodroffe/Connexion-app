@@ -62,16 +62,32 @@ const Users = () => {
     return <Text>Error loading users</Text>;
   }
 
-  const handleAccessProtected = (permissions: string[] | undefined) => {
-    if (
-      Array.isArray(permissions) &&
-      permissions.includes("CanViewProtectedRoute")
-    ) {
-      navigate("/protectedroute");
-    } else {
+  const handleAccessProtected = async (userId: string) => {
+    try {
+      const response = await axios.get<{ permissions: string[] }>(
+        `http://localhost:8080/user/${userId}/permissions`,
+        {
+          headers: { "X-User-Id": "5" }, // Hardcoded admin user ID, this would normally be the logged in user's token
+        }
+      );
+
+      const { permissions } = response.data;
+
+      if (permissions.includes("CanViewProtectedRoute")) {
+        navigate("/protectedroute");
+      } else {
+        toast({
+          title: "Access denied.",
+          description: "You do not have permission to view this route.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
       toast({
-        title: "Access denied.",
-        description: "You do not have permission to view this route.",
+        title: "Error",
+        description: "An error occurred while checking permissions.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -122,9 +138,7 @@ const Users = () => {
               <GridItem>
                 <Button
                   colorScheme="blue"
-                  onClick={() =>
-                    handleAccessProtected(user.PermissionsOverride)
-                  }
+                  onClick={() => handleAccessProtected(user.UserId)}
                 >
                   Access protected page
                 </Button>
