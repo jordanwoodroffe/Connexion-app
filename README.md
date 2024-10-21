@@ -53,6 +53,7 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 - Manual Trigger: A GitHub Actions workflow is set up to manually trigger the creation of a randomized user.
 
 ## Example Basic CDK for Backend
+
 ```
 import _ as cdk from '@aws-cdk/core';
 import _ as dynamodb from '@aws-cdk/aws-dynamodb';
@@ -267,6 +268,32 @@ curl -X PUT "http://localhost:8080/user/1" \
   "Email": "janedoe@example.com",
   "Role": "User",
   "PermissionsOverride": ["CanViewProtectedRoute"]
+}
+```
+
+### GET USER PERMISSIONS
+
+Fetch the combined permissions of a user by their `UserId`, including role permissions and permission overrides.
+
+**Request:**
+
+```
+curl -X GET "http://localhost:8080/user/10/permissions" \
+ -H "Content-Type: application/json" \
+ -H "X-User-Id: 5"
+```
+
+**Response:**
+
+- **200 OK**: Returns the combined permissions of the user.
+- **404 Not Found**: If the user or role does not exist.
+- **401 Unauthorized**: If the `X-User-Id` header is missing or invalid.
+
+**Response Body:**
+
+```json
+{
+  "permissions": ["CanEditUser", "CanViewProtectedRoute"]
 }
 ```
 
