@@ -43,6 +43,8 @@ Please paste the emailed .env which required AWS credentials to connect to DB in
 
 ## CI/CD
 
+![image](https://github.com/user-attachments/assets/1bfcca30-39dd-4c2a-9546-082dc0ebd891)
+
 - GitHub Actions: Used for continuous integration and deployment.
 - Manual Trigger: A GitHub Actions workflow is set up to manually trigger the creation of a randomized user.
 
