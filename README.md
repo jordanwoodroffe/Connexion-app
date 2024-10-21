@@ -14,12 +14,6 @@ Please paste the emailed .env (contains required AWS credentials to connect to D
 2. **Start the development server**:
    npm run dev
 
-## Design Choices
-
-- Node.js and Express: Chosen for its simplicity and performance in building RESTful APIs.
-- DynamoDB: Used for its scalability and flexibility in managing user data.
-- AWS SDK V3: Utilized for interacting with DynamoDB and other AWS services.
-
 ## DynamoDB Schema
 
 ![image](https://github.com/user-attachments/assets/bf7f3fce-ebed-4da1-b0e4-d80ebd6f78c3)
